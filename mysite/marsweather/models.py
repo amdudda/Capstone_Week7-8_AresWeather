@@ -26,4 +26,9 @@ class Weather(models.Model):
     season = models.CharField(max_length=10,null=True,blank=True)#: "Month 11",
     sunrise = models.DateTimeField(null=True) #": "2013-05-01T11:00:00Z",
     sunset = models.DateTimeField(null=True) # "2013-05-01T22:00:00Z"
+
+    def __str__(self):
+        # TODO clean this up so it returns prettier data, but it works for now
+        data = {'terrestrial date':self.terrestrial_date,'sol':self.sol,'lowInC': self.min_temp,'hiInC':self.max_temp,'wind_speed':self.wind_speed,'atmospheric conditions': self.atmo_opacity}
+        return str(data)
 # end Weather model
