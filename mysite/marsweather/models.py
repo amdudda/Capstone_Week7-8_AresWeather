@@ -32,3 +32,6 @@ class Weather(models.Model):
         data = {'terrestrial date':self.terrestrial_date,'sol':self.sol,'lowInC': self.min_temp,'hiInC':self.max_temp,'wind_speed':self.wind_speed,'atmospheric conditions': self.atmo_opacity}
         return str(data)
 # end Weather model
+
+if (__name__ == "__main__"):
+    print(Weather.objects.all())
