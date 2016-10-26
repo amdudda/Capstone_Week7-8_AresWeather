@@ -15,5 +15,4 @@ def setup():
     return True
 
 if (__name__ == "__main__"):
-    settings.configure()
     print(Weather.objects.all())
