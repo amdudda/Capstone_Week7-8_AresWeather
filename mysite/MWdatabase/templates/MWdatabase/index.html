@@ -4,6 +4,7 @@
 	<STYLE TYPE="text/css">
 	div { margin-left:3em; }
 	</STYLE>
+	{% load static %}
 </HEAD>
 <BODY>
 	<H1>Mars Weather Data Graphs</H1>
@@ -15,57 +16,8 @@
 	<H2>October 2012's weather is:</H2>
 	<DIV ID="recent_past">
 	</DIV>
+	<!--This is not actually fetching data.  Haz a sad. -->
+	<SCRIPT TYPE="text/javascript" href="{% static 'MWdatabase/javascript/fetchWeatherData.js' %}"> </SCRIPT>
 
-	<SCRIPT TYPE="text/javascript">
-	// mars weather api at http://marsweather.ingenology.com/#get_started
-	function httpGetAsync(theUrl, callback){
-	    var xmlHttp = new XMLHttpRequest();
-		xmlHttp.onreadystatechange = function() { 
-		    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-				callback(xmlHttp.responseText);
-			}
-			else { alert(xmlHttp.status); }
-    }
-
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-    xmlHttp.send(null);
-	}
-	
-	function writeCurrentWeather(jsondata){
-		mydata = JSON.parse(jsondata);
-		weatherdata = mydata.report;
-		// alert(weatherdata["terrestrial_date"]);
-		info2print = "";
-		Object.keys(weatherdata).forEach(function(key) {
-			info2print += (key + ": " + weatherdata[key] + "\n");
-		});
-		document.getElementById("current").innerText = info2print;
-	}
-
-	// TODO: this only fetches the first page of results, we'll need to figure out how 
-	// to page through results.  Maybe use a recursive function to simulate threading?
-	function writeMultiDayWeather(jsondata) {
-		//alert(jsondata);
-		mydata = JSON.parse(jsondata);
-		weatherdata = mydata.results;
-		alert(weatherdata[0].sol);
-		info2print = "";
-		for (i=0; i<weatherdata.length; i++){
-			Object.keys(weatherdata[i]).forEach(function(key) {
-				info2print += (key + ": " + weatherdata[i][key] + "\n");
-			});
-			// extra line break between records
-			info2print += "\n";
-		}
-		document.getElementById("recent_past").innerText = info2print;
-	}
-
-	latestweather = "http://marsweather.ingenology.com/v1/latest/";
-	oct2012 = "http://marsweather.ingenology.com/v1/archive/?terrestrial_date_start=2012-10-01&terrestrial_date_end=2012-10-31";
-	
-	httpGetAsync(latestweather,writeCurrentWeather);
-	httpGetAsync(oct2012,writeMultiDayWeather);
-	</SCRIPT>
-	
 </BODY>
 </HTML>
