@@ -17,7 +17,12 @@
 	<DIV ID="recent_past">
 	</DIV>
 	<!--This is not actually fetching data.  Haz a sad. -->
-	<SCRIPT TYPE="text/javascript" href="{% static 'MWdatabase/javascript/fetchWeatherData.js' %}"> </SCRIPT>
+	<SCRIPT TYPE="text/javascript" SRC="{% static 'MWdatabase/javascript/fetchWeatherData.js' %}"></SCRIPT>
+
+<!-- let's try reading our sample data instead-->
+<h3> some sample data lifted from MAAS: </h3>
+	<DIV ID="sample">Yoo hoo!</DIV>
+<SCRIPT TYPE="text/javascript" SRC="{% static 'MWdatabase/javascript/sampleData.js' %}"></SCRIPT>
 
 </BODY>
 </HTML>
