@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'MWdatabase.apps.MWdatabaseConfig',
     'marsweather.apps.MarsweatherConfig',
     'django.contrib.admin',
     'django.contrib.auth',
