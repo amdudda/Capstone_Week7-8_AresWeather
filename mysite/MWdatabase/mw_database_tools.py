@@ -13,5 +13,5 @@ def setup():
     print(Weather.objects.all())
     return True
 
-if (__name__ == "__main__"):
-    print(Weather.objects.all())
+# if (__name__ == "__main__"):
+print(Weather.objects.all())
