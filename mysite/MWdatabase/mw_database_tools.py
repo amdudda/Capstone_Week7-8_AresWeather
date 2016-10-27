@@ -2,8 +2,6 @@
 This imports data from the API and saves it to the database.
 '''
 from mysite.marsweather.models import Weather
-from mysite.mysite import settings
-import os
 
 
 def setup():
@@ -12,6 +10,7 @@ def setup():
     :return: True if successful
     '''
 
+    print(Weather.objects.all())
     return True
 
 if (__name__ == "__main__"):
