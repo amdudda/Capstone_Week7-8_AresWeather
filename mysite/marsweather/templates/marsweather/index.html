@@ -16,8 +16,29 @@
             Skies are: {{ weather.atmo_opacity }}<br/>
         {% endif %}
         (date: {{ weather.terrestrial_date }})<br/>
-    <h3><a href="{{dirp}}{{next_sol}}">The next sol is {{ next_sol }}</a></h3>
-    <h3>The previous sol is {{ prev_sol }}</h3>
+    <!-- Where applicable, announce first/last available sol-->
+    {% if not prev_sol %}
+        <h3>This is the first available sol.</h3>
+    {% endif %}
+    {% if not next_sol %}
+        <h3>This is the last available sol.</h3>
+    {% endif %}
+
+    <!-- Link to the previous sol's data if available.-->
+    <h3>
+    {% if prev_sol %}
+        <a href="{{dirp}}{{prev_sol}}">&lt;&lt; Prev</a>
+    {% else %}
+        &lt;&lt; Prev
+    {% endif %}
+     --
+    <!-- Link to the next sol's data if available.-->
+    {% if next_sol %}
+        <a href="{{dirp}}{{next_sol}}">Next &gt;&gt;</a>
+    {% else %}
+        Next &gt;&gt;
+    {% endif %}
+    </h3>
 </div>
 </body>
 </html>
