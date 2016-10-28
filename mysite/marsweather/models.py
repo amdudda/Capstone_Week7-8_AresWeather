@@ -30,7 +30,10 @@ class Weather(models.Model):
     def __str__(self):
         # TODO clean this up so it returns prettier data, but it works for now
         data = {'terrestrial date':self.terrestrial_date,'sol':self.sol,'lowInC': self.min_temp,'hiInC':self.max_temp,'wind_speed':self.wind_speed,'atmospheric conditions': self.atmo_opacity}
-        return str(data)
+        output = ''
+        for key in data:
+            output += str(key) + ": " + str(data[key]) + "\n"
+        return str(output)
 # end Weather model
 
 if (__name__ == "__main__"):
