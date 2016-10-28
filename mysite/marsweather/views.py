@@ -14,9 +14,9 @@ def index(request):
     w = Weather.objects.order_by('sol')[:1][0]
     ns = int(w.sol) + 1
     if (ns > last_sol): ns = None
-    ps = int(w.sol) - 1
-    if (ps < first_sol): ps = None
-    context = {'weather': w, 'next_sol': ns, 'prev_sol': ps}
+    ps = None
+    dirp = ''
+    context = {'weather': w, 'next_sol': ns, 'prev_sol': ps, 'dirp': dirp}
     return render(request, 'marsweather/index.html', context)
 
 def sol(request,sol_id):
@@ -25,5 +25,6 @@ def sol(request,sol_id):
     if (ns > last_sol): ns = None
     ps = int(w.sol) - 1
     if (ps < first_sol): ps = None
-    context = {'weather': w, 'next_sol': ns, 'prev_sol': ps}
+    dirp = "../"
+    context = {'weather': w, 'next_sol': ns, 'prev_sol': ps, 'dirp': dirp}
     return render(request, 'marsweather/index.html', context)
