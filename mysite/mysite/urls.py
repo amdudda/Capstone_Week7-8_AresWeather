@@ -18,6 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^marsweather/', include('marsweather.urls')),
-    url(r'^MWdatabase/', include('MWdatabase.urls')),
+    # don't need this anymore: url(r'^MWdatabase/', include('MWdatabase.urls')),
     url(r'^admin/', admin.site.urls),
 ]
