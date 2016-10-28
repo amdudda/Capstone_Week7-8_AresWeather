@@ -16,14 +16,42 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # TODO: verify database is actually empty before pushing data to db...
+        del_and_import = 'n'
+        OK_to_process_data = True
+        '''
+        if (Weather.objects.first()):
+            del_and_import = input("There is already data in the database. OK to delete and reload (y for 'yes')?\n> ")
+            print("proceed flag set to: " + del_and_import)
+            if del_and_import.lower() == "y":
+                # delete all records
+                Weather.objects.all().delete()
+            else:
+                # tell the user the program's aborting the upload and set process_data to False so it doesn't
+                # try to download any data
+                print("You have chosen not to delete and reload data. Aborting data import.")
+                OK_to_process_data = False
+        # end check for existing data
+        '''
+        # for now, let's just wipe everything and reload...
+        print("Deleting and replacing database records.")
+        if (Weather.objects.first()): Weather.objects.all().delete()
+        if OK_to_process_data:
+            '''
+            to just load hardcoded sample data, before running:
+            1. uncomment the load_sample_data line and
+            2. comment out the load_api_data line.
+            '''
+            # self.load_sample_data()
+            self.load_api_data()
+        # end data upload
+    # end handler
 
-        # self.load_sample_data()
-
+    def load_api_data(self):
         url = 'http://marsweather.ingenology.com/v1/archive/?format=json'
         next_page = True  # set to true to get us through first page of data...
         # counter used for debugging while loop
         counter = 0
-        while next_page:    # and counter < 5:
+        while next_page:  # and counter < 5:
             r = requests.get(url).json()
             next_page = r['next']
             weatherdata = r['results']
@@ -57,9 +85,10 @@ class Command(BaseCommand):
             # set url to next page in data
             url = next_page
             counter += 1
-            print("page " + str(counter) + "processed.")
-        # end while loop
-    # end handler
+            print("page " + str(counter) + " processed.")
+            # end while loop
+
+    # end load_api_data
 
     def load_sample_data(self):
         '''
@@ -94,3 +123,4 @@ class Command(BaseCommand):
         # end for record in devData
         # debugging; and print out to confirm data has been saved correctly
         print(Weather.objects.all());
+    # end load_sample_data
