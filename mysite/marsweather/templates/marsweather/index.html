@@ -12,7 +12,12 @@
         <div id="daily_data">
         Low temp: {{ weather.min_temp }} ({{ weather.min_temp_fahrenheit }}F)<br/>
         High temp: {{ weather.max_temp }}C ({{ weather.max_temp_fahrenheit }}F)<br/>
-        Wind speed: {{ weather.wind_speed }} kph<br/>
+        Wind speed:
+            {% if weather.wind_speed %}
+                {{ weather.wind_speed }} kph<br/>
+            {% else %}
+                n/a<br/>
+            {% endif %}
         {% if weather.atmo_opacity %}
             Skies are: {{ weather.atmo_opacity }}<br/>
         {% endif %}
