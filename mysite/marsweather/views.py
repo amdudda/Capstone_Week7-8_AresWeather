@@ -16,7 +16,8 @@ def index(request):
     if (ns > last_sol): ns = None
     ps = None
     dirp = ''
-    context = {'weather': w, 'next_sol': ns, 'prev_sol': ps, 'dirp': dirp}
+    navdata = {'next_sol': ns, 'prev_sol': ps, 'dirp': dirp, 'first': first_sol, 'last': last_sol}
+    context = {'weather': w, 'navdata': navdata}
     return render(request, 'marsweather/index.html', context)
 
 def sol(request,sol_id):
@@ -40,7 +41,8 @@ def sol(request,sol_id):
         dirp = "../"
         if (ns > last_sol): ns = None
         if (ps < first_sol): ps = None
-        context = {'weather': w, 'next_sol': ns, 'prev_sol': ps, 'dirp': dirp, 'dne': DNE}
+        navdata = {'next_sol': ns, 'prev_sol': ps, 'dirp': dirp, 'first':first_sol, 'last':last_sol}
+        context = {'weather': w, 'navdata': navdata, 'dne': DNE}
         return render(request, 'marsweather/index.html', context)
 
 def about(request):
