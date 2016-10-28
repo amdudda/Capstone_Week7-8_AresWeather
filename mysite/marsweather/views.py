@@ -6,16 +6,17 @@ from .models import Weather
 # in the database
 first_sol = 0
 last_sol = 0
-# update them if there is data in the database
-if (Weather.objects.first()):
-    first_sol = Weather.objects.order_by('sol')[:1][0].sol
-    last_sol = Weather.objects.order_by('-sol')[:1][0].sol
+
 
 # Create your views here.
 
 def index(request):
     # return HttpResponse("Hello, Mars explorers!  This will e a Mars weather explorer app!")
     # get the first available sol's worth of data and send it to the home page as its context
+    # update these if there is data in the database
+    if (Weather.objects.first()):
+        first_sol = Weather.objects.order_by('sol')[:1][0].sol
+        last_sol = Weather.objects.order_by('-sol')[:1][0].sol
     w = Weather.objects.order_by('sol')[:1][0]
     ns = int(w.sol) + 1
     if (ns > last_sol): ns = None
@@ -30,6 +31,10 @@ def sol(request,sol_id):
     DNE = False
     ns = int(sol_id) + 1
     ps = int(sol_id) - 1
+    # update these if there is data in the database
+    if (Weather.objects.first()):
+        first_sol = Weather.objects.order_by('sol')[:1][0].sol
+        last_sol = Weather.objects.order_by('-sol')[:1][0].sol
     try:
         w = Weather.objects.get(sol=sol_id)
         # w = Weather.objects.get(sol=sol_id)
