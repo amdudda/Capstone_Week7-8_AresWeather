@@ -5,7 +5,7 @@ for how to set this up.  I left out _private.py since I don't seem to need it.
 '''
 from ...models import Weather
 from django.core.management.base import BaseCommand, CommandError
-import requests
+import requests  # documentation: http://docs.python-requests.org/en/master/user/quickstart/
 import json as JSON
 
 class Command(BaseCommand):
@@ -23,11 +23,36 @@ class Command(BaseCommand):
         next_page = r['next']
         weatherdata = r['results']
         # don't need this yet: print("next page is: " + next_page)
-        print(weatherdata[0])
+        # debugging: print(weatherdata[0])
+        for record in weatherdata:
+            # grab our records and store them in a weather object
+            w = Weather(
+                terrestrial_date=record['terrestrial_date'],
+                sol=record['sol'],
+                ls=record['ls'],
+                min_temp=record['min_temp'],
+                min_temp_fahrenheit=record['min_temp_fahrenheit'],
+                max_temp=record['max_temp'],
+                max_temp_fahrenheit=record['max_temp_fahrenheit'],
+                pressure=record['pressure'],
+                pressure_string=record['pressure_string'],
+                abs_humidity=record['abs_humidity'],
+                wind_speed=record['wind_speed'],
+                wind_direction=record['wind_direction'],
+                atmo_opacity=record['atmo_opacity'],
+                season=record['season'],
+                sunrise=record['sunrise'],
+                sunset=record['sunset']
+            )
+            # save the data to the database
+            w.save()
+        # end for record in weatherdata
+        # debugging; and print out to confirm data has been saved correctly
+        print(Weather.objects.all());
 
     def load_sample_data(self):
         '''
-        This loads sample data to the database.
+        This loads sample data to the database.  Legacy use only.
         :return:
         '''
         devData = JSON.loads(
