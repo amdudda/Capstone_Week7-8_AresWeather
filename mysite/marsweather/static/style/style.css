@@ -10,8 +10,9 @@ body {
 
 #daily_data {
     margin-left: 3em;
+    height: 150px;
 }
 
 #img_holder {
-    float: right;
+    float: left;
 }
