@@ -26,4 +26,4 @@
 * Exploit the atmo_opacity data to change the image so it matches the weather conditions.
 * Implement a thermometer to visualize temperature data
 * Perhaps implement a windsock image to represent wind speed.
-* Extend this into a web-based educational game in which players can explore Mars while pretending to be the Curiosity rover, gathering data and learning about areology.
+* Extend this into a web-based educational game in which players can explore Mars while pretending to be the Curiosity rover, gathering data and learning about [areology](https://en.wikipedia.org/wiki/Geology_of_Mars).
