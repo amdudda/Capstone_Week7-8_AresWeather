@@ -19,9 +19,10 @@ class Command(BaseCommand):
 
         # self.load_sample_data()
         url = 'http://marsweather.ingenology.com/v1/archive/?format=json'
-        next_page = True  # set to tru to get us through first page of data...
-        counter = 0
-        while next_page and counter < 5:
+        next_page = True  # set to true to get us through first page of data...
+        # counter used for debugging while loop
+        # counter = 0
+        while next_page:    # and counter < 5:
             r = requests.get(url).json()
             next_page = r['next']
             weatherdata = r['results']
@@ -56,7 +57,7 @@ class Command(BaseCommand):
 
             # set url to next page in data
             url = next_page
-            counter += 1
+            # counter += 1
         # end while loop
 
     def load_sample_data(self):
