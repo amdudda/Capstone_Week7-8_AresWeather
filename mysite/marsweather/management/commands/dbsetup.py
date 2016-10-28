@@ -19,36 +19,45 @@ class Command(BaseCommand):
 
         # self.load_sample_data()
         url = 'http://marsweather.ingenology.com/v1/archive/?format=json'
-        r = requests.get(url).json()
-        next_page = r['next']
-        weatherdata = r['results']
-        # don't need this yet: print("next page is: " + next_page)
-        # debugging: print(weatherdata[0])
-        for record in weatherdata:
-            # grab our records and store them in a weather object
-            w = Weather(
-                terrestrial_date=record['terrestrial_date'],
-                sol=record['sol'],
-                ls=record['ls'],
-                min_temp=record['min_temp'],
-                min_temp_fahrenheit=record['min_temp_fahrenheit'],
-                max_temp=record['max_temp'],
-                max_temp_fahrenheit=record['max_temp_fahrenheit'],
-                pressure=record['pressure'],
-                pressure_string=record['pressure_string'],
-                abs_humidity=record['abs_humidity'],
-                wind_speed=record['wind_speed'],
-                wind_direction=record['wind_direction'],
-                atmo_opacity=record['atmo_opacity'],
-                season=record['season'],
-                sunrise=record['sunrise'],
-                sunset=record['sunset']
-            )
-            # save the data to the database
-            w.save()
-        # end for record in weatherdata
-        # debugging; and print out to confirm data has been saved correctly
-        print(Weather.objects.all());
+        next_page = True  # set to tru to get us through first page of data...
+        counter = 0
+        while next_page and counter < 5:
+            r = requests.get(url).json()
+            next_page = r['next']
+            weatherdata = r['results']
+            # don't need this yet: print("next page is: " + next_page)
+            # debugging: print(weatherdata[0])
+            for record in weatherdata:
+                # grab our records and store them in a weather object
+                w = Weather(
+                    terrestrial_date=record['terrestrial_date'],
+                    sol=record['sol'],
+                    ls=record['ls'],
+                    min_temp=record['min_temp'],
+                    min_temp_fahrenheit=record['min_temp_fahrenheit'],
+                    max_temp=record['max_temp'],
+                    max_temp_fahrenheit=record['max_temp_fahrenheit'],
+                    pressure=record['pressure'],
+                    pressure_string=record['pressure_string'],
+                    abs_humidity=record['abs_humidity'],
+                    wind_speed=record['wind_speed'],
+                    wind_direction=record['wind_direction'],
+                    atmo_opacity=record['atmo_opacity'],
+                    season=record['season'],
+                    sunrise=record['sunrise'],
+                    sunset=record['sunset']
+                )
+                # save the data to the database
+                w.save()
+            # end for record in weatherdata
+
+            # debugging; and print out to confirm data has been saved correctly
+            # print(Weather.objects.all());
+
+            # set url to next page in data
+            url = next_page
+            counter += 1
+        # end while loop
 
     def load_sample_data(self):
         '''
