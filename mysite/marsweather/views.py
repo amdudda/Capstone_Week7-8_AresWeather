@@ -2,9 +2,14 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import Weather
 
-# some useful globals
-first_sol = Weather.objects.order_by('sol')[:1][0].sol
-last_sol = Weather.objects.order_by('-sol')[:1][0].sol
+# some useful globals - I have to intialize them to zero because otherwise the code breaks if there are no data
+# in the database
+first_sol = 0
+last_sol = 0
+# update them if there is data in the database
+if (Weather.objects.first()):
+    first_sol = Weather.objects.order_by('sol')[:1][0].sol
+    last_sol = Weather.objects.order_by('-sol')[:1][0].sol
 
 # Create your views here.
 

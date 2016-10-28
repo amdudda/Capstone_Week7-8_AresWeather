@@ -18,16 +18,15 @@ class Command(BaseCommand):
         # TODO: verify database is actually empty before pushing data to db...
 
         # self.load_sample_data()
+
         url = 'http://marsweather.ingenology.com/v1/archive/?format=json'
         next_page = True  # set to true to get us through first page of data...
         # counter used for debugging while loop
-        # counter = 0
+        counter = 0
         while next_page:    # and counter < 5:
             r = requests.get(url).json()
             next_page = r['next']
             weatherdata = r['results']
-            # don't need this yet: print("next page is: " + next_page)
-            # debugging: print(weatherdata[0])
             for record in weatherdata:
                 # grab our records and store them in a weather object
                 w = Weather(
@@ -57,8 +56,10 @@ class Command(BaseCommand):
 
             # set url to next page in data
             url = next_page
-            # counter += 1
+            counter += 1
+            print("page " + str(counter) + "processed.")
         # end while loop
+    # end handler
 
     def load_sample_data(self):
         '''
