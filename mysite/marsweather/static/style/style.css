@@ -1,0 +1,17 @@
+body {
+    color: darkred;
+    background-color: #ffeebc;
+}
+
+#weatherdata {
+    float: left;
+    width: 33%;
+}
+
+#daily_data {
+    margin-left: 3em;
+}
+
+#img_holder {
+    float: right;
+}

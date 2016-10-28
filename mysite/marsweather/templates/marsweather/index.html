@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Mars Weather Rover Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}" />
 </head>
-<body background="{% static 'images/sunny.jpeg' %}">
-    <h1>"Hello, Mars explorers!  This will be a Mars weather explorer app!"</h1>
+<body>
 <div id="weatherdata">
-    <h3>The weather for sol {{ weather.sol }} is:</h3>
+    <h1>Hello, Mars explorers!  The weather for sol {{ weather.sol }} is:</h1>
+        <div id="daily_data">
         Low temp: {{ weather.min_temp }} ({{ weather.min_temp_fahrenheit }}F)<br/>
         High temp: {{ weather.max_temp }}C ({{ weather.max_temp_fahrenheit }}F)<br/>
         Wind speed: {{ weather.wind_speed }} kph<br/>
@@ -16,14 +17,14 @@
             Skies are: {{ weather.atmo_opacity }}<br/>
         {% endif %}
         (date: {{ weather.terrestrial_date }})<br/>
-    <!-- Where applicable, announce first/last available sol-->
-    {% if not prev_sol %}
-        <h3>This is the first available sol.</h3>
-    {% endif %}
-    {% if not next_sol %}
-        <h3>This is the last available sol.</h3>
-    {% endif %}
-
+        <!-- Where applicable, announce first/last available sol-->
+        {% if not prev_sol %}
+            <h3>This is the first available sol.</h3>
+        {% endif %}
+        {% if not next_sol %}
+            <h3>This is the last available sol.</h3>
+        {% endif %}
+        </div>
     <!-- Link to the previous sol's data if available.-->
     <h3>
     {% if prev_sol %}
@@ -39,6 +40,9 @@
         Next &gt;&gt;
     {% endif %}
     </h3>
+</div>
+<div id="img_holder">
+    <img src="{% static 'images/sunny.jpeg' %}" />
 </div>
 </body>
 </html>
