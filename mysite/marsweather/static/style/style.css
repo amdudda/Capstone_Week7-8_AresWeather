@@ -16,3 +16,8 @@ body {
 #img_holder {
     float: left;
 }
+
+#aboutlink {
+    position: fixed;
+    bottom: 10px;
+}

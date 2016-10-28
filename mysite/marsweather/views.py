@@ -42,3 +42,7 @@ def sol(request,sol_id):
         if (ps < first_sol): ps = None
         context = {'weather': w, 'next_sol': ns, 'prev_sol': ps, 'dirp': dirp, 'dne': DNE}
         return render(request, 'marsweather/index.html', context)
+
+def about(request):
+    # render the about page.
+    return render(request, 'marsweather/about.html')
