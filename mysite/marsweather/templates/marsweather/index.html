@@ -39,23 +39,23 @@
     <!-- Link to the previous sol's data if available.-->
     <h3>
     {% if navdata.prev_sol %}
-        <a href="{{navdata.dirp}}{{navdata.prev_sol}}">&lt;&lt; Prev</a>
+        <a href="{% url 'sol' navdata.prev_sol %}">&lt;&lt; Prev</a>
     {% else %}
         &lt;&lt; Prev
     {% endif %}
      --
     <!-- Link to the next sol's data if available.-->
     {% if navdata.next_sol %}
-        <a href="{{navdata.dirp}}{{navdata.next_sol}}">Next &gt;&gt;</a>
+        <a href="{% url 'sol' navdata.next_sol %}">Next &gt;&gt;</a>
     {% else %}
         Next &gt;&gt;
     {% endif %}
     <br/>
     <br/>
     <!-- also provide first/last sol navigation-->
-        <a href="{{navdata.dirp}}{{navdata.first}}">&lt;&lt; First</a>
+        <a href="{% url 'sol' navdata.first %}">&lt;&lt; First</a>
         --
-        <a href="{{navdata.dirp}}{{navdata.last}}">Last &gt;&gt;</a>
+        <a href="{% url 'sol' navdata.last %}">Last &gt;&gt;</a>
     </h3>
 </div>
 <div id="img_holder">
