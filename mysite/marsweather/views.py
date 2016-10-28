@@ -21,21 +21,24 @@ def index(request):
 
 def sol(request,sol_id):
     w = None
+    DNE = False
     ns = int(sol_id) + 1
     ps = int(sol_id) - 1
     try:
-        w = get_object_or_404(Weather, sol=sol_id)
+        w = Weather.objects.get(sol=sol_id)
         # w = Weather.objects.get(sol=sol_id)
         # # print(w)
         # ns = int(w.sol) + 1
         # ps = int(w.sol) - 1
-    except w.DoesNotExist:
+    except Weather.DoesNotExist:
         # catch case where the sol does not have any data - just make sure w returns a sol so the web page displays it
         # I want to handle it this way in case someone decides to get creative with picking sols
         w = Weather(sol=sol_id)
+        DNE = True
     finally:
+        print(w)
         dirp = "../"
         if (ns > last_sol): ns = None
         if (ps < first_sol): ps = None
-        context = {'weather': w, 'next_sol': ns, 'prev_sol': ps, 'dirp': dirp}
+        context = {'weather': w, 'next_sol': ns, 'prev_sol': ps, 'dirp': dirp, 'dne': DNE}
         return render(request, 'marsweather/index.html', context)

@@ -10,25 +10,31 @@
 <div id="weatherdata">
     <h1>Hello, Mars explorers!  The weather for sol {{ weather.sol }} is:</h1>
         <div id="daily_data">
-        Low temp: {{ weather.min_temp }} ({{ weather.min_temp_fahrenheit }}F)<br/>
-        High temp: {{ weather.max_temp }}C ({{ weather.max_temp_fahrenheit }}F)<br/>
-        Wind speed:
-            {% if weather.wind_speed %}
-                {{ weather.wind_speed }} kph<br/>
+            {% if dne %}
+                <!-- if no data available, notify the user. -->
+                No data available for this sol.
             {% else %}
-                n/a<br/>
+                Low temp: {{ weather.min_temp }} ({{ weather.min_temp_fahrenheit }}F)<br/>
+                High temp: {{ weather.max_temp }}C ({{ weather.max_temp_fahrenheit }}F)<br/>
+                Wind speed:
+                    {% if weather.wind_speed %}
+                        {{ weather.wind_speed }} kph<br/>
+                    {% else %}
+                        n/a<br/>
+                    {% endif %}
+                {% if weather.atmo_opacity %}
+                    Skies are: {{ weather.atmo_opacity }}<br/>
+                {% endif %}
+                (date: {{ weather.terrestrial_date }})<br/>
             {% endif %}
-        {% if weather.atmo_opacity %}
-            Skies are: {{ weather.atmo_opacity }}<br/>
-        {% endif %}
-        (date: {{ weather.terrestrial_date }})<br/>
-        <!-- Where applicable, announce first/last available sol-->
-        {% if not prev_sol %}
-            <h3>This is the first available sol.</h3>
-        {% endif %}
-        {% if not next_sol %}
-            <h3>This is the last available sol.</h3>
-        {% endif %}
+
+            <!-- Where applicable, announce first/last available sol-->
+            {% if not prev_sol %}
+                <h3>This is the first available sol.</h3>
+            {% endif %}
+            {% if not next_sol %}
+                <h3>This is the last available sol.</h3>
+            {% endif %}
         </div>
     <!-- Link to the previous sol's data if available.-->
     <h3>
