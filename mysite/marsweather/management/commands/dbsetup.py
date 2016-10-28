@@ -15,7 +15,7 @@ class Command(BaseCommand):
     #     parser.add_argument('poll_id', nargs='+', type=int)
 
     def handle(self, *args, **options):
-        # TODO: verify database is actually empty before pushing data to db...
+        # TODO: verify database is actually empty before pushing data to db... it's not accepting user input for some reason...
         del_and_import = 'n'
         OK_to_process_data = True
         '''
@@ -32,7 +32,7 @@ class Command(BaseCommand):
                 OK_to_process_data = False
         # end check for existing data
         '''
-        # for now, let's just wipe everything and reload...
+        # TODO for now, let's just wipe everything and reload...
         print("Deleting and replacing database records.")
         if (Weather.objects.first()): Weather.objects.all().delete()
         if OK_to_process_data:
