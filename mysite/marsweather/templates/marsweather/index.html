@@ -7,6 +7,13 @@
 </head>
 <body background="{% static 'images/sunny.jpeg' %}">
     <h1>"Hello, Mars explorers!  This will be a Mars weather explorer app!"</h1>
-<div id="weatherdata"></div>
+<div id="weatherdata">
+    <h3>The weather for sol {{ weather.sol }} is:</h3>
+        Low temp: {{ weather.min_temp }} ({{ weather.min_temp_fahrenheit }}F)<br/>
+        High temp: {{ weather.max_temp }}C ({{ weather.max_temp_fahrenheit }}F)<br/>
+        Wind speed: {{ weather.wind_speed }} kph<br/>
+        Skies are: {{ weather.atmocond }}<br/>
+        (date: {{ weather.terrestrial_date }})<br/>
+</div>
 </body>
 </html>

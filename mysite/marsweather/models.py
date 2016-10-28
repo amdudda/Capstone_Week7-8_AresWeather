@@ -34,6 +34,17 @@ class Weather(models.Model):
         for key in data:
             output += str(key) + ": " + str(data[key]) + "\n"
         return str(output)
+
+    def htmlify(self):
+        output = "<h3>The weather for sol " + self.sol + " is:</h3>"
+        output += "Low temp: " + self.min_temp + "C (" + self.min_temp_fahrenheit + "F)<br/>"
+        output += "High temp: " + self.max_temp + "C (" + self.max_temp_fahrenheit + "F)<br/>"
+        output += "Wind speed: " + self.wind_speed + "kph<br/>"
+        atmocond = "n/a"
+        if (self.atmo_opacity != 'None'): atmocond = self.atmo_opacity
+        output += "Skies are: " + atmocond + "<br/>"
+        output += "(date: " + self.terrestrial_date + ")<br/>"
+        return output
 # end Weather model
 
 if (__name__ == "__main__"):
