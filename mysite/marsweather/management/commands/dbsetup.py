@@ -22,7 +22,7 @@ class Command(BaseCommand):
         r = requests.get(url).json()
         next_page = r['next']
         weatherdata = r['results']
-        print("next page is: " + next_page)
+        # don't need this yet: print("next page is: " + next_page)
         print(weatherdata[0])
 
     def load_sample_data(self):
