@@ -12,9 +12,12 @@
         Low temp: {{ weather.min_temp }} ({{ weather.min_temp_fahrenheit }}F)<br/>
         High temp: {{ weather.max_temp }}C ({{ weather.max_temp_fahrenheit }}F)<br/>
         Wind speed: {{ weather.wind_speed }} kph<br/>
-        Skies are: {{ weather.atmocond }}<br/>
+        {% if weather.atmo_opacity %}
+            Skies are: {{ weather.atmo_opacity }}<br/>
+        {% endif %}
         (date: {{ weather.terrestrial_date }})<br/>
     <h3>The next sol is {{ next_sol }}</h3>
+    <h3>The previous sol is {{ prev_sol }}</h3>
 </div>
 </body>
 </html>
