@@ -41,13 +41,14 @@ class Command(BaseCommand):
             1. uncomment the load_sample_data line and
             2. comment out the load_api_data line.
             '''
+            archive_url = 'http://marsweather.ingenology.com/v1/archive/?format=json'
             # self.load_sample_data()
-            self.load_api_data()
+            self.load_api_data(archive_url)
         # end data upload
     # end handler
 
-    def load_api_data(self):
-        url = 'http://marsweather.ingenology.com/v1/archive/?format=json'
+    def load_api_data(self, url):
+
         next_page = True  # set to true to get us through first page of data...
         # counter used for debugging while loop
         counter = 0
