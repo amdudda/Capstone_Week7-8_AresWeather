@@ -18,6 +18,7 @@
 
 ## Known Issues
 
+* No unit testing - this needs to be implemented sooner rather than later!
 * _DBsetup_ wipes out and replaces existing data.
 * No meaningful error handling in _dbsetup_ or _dbupdate_ - need to implement database error handling and research CommandError.
 * Nonexistent sols should be identified as such rather than loaded with the generic "no data for this sol" page used for sols that have no data.
