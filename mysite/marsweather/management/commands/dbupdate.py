@@ -19,12 +19,20 @@ class Command(BaseCommand):
         :param options:
         :return:
         '''
-        # calculate the appropriate date and concatenate our target url
-        update_url = 'http://marsweather.ingenology.com/v1/archive/?terrestrial_date_start='
-        start_date = Weather.objects.order_by('-terrestrial_date')[:1][0].terrestrial_date
-        start_date += timedelta(days=1)
-        update_url += str(start_date)
-        print("Requesting data using start date: %s." % str(start_date))
 
-        # request and store updated data
-        load_api_data(update_url)
+        # Make sure database is not empty before requesting & importing fresh data.
+        if (len(Weather.objects.all()) == 0):
+            print("Database has no records.  Please invoke 'python manage.py dbsetup' to import entire dataset.")
+        else:
+            # calculate the appropriate date and concatenate our target url
+            update_url = 'http://marsweather.ingenology.com/v1/archive/?terrestrial_date_start='
+            start_date = Weather.objects.order_by('-terrestrial_date')[:1][0].terrestrial_date
+            start_date += timedelta(days=1)
+            update_url += str(start_date)
+            print("Requesting data using start date: %s." % str(start_date))
+
+            # request and store updated data
+            load_api_data(update_url)
+        # end if-else
+    # end Command handler
+# end Command

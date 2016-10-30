@@ -46,6 +46,7 @@ class Command(BaseCommand):
             self.load_api_data(archive_url)
         # end data upload
     # end handler
+# end Command
 
 def load_api_data(url):
     '''

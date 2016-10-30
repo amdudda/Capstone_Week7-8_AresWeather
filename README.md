@@ -4,7 +4,8 @@
 
 ## Features
 
-* Download data from {MAAS} API
+* Automated database setup via _python manage.py migrate_.
+* Download data from [{MAAS} API](http://marsweather.ingenology.com/)
     * As of 2010.OCT.28, the dataset is about 738 records long (approx. 75 pages of data) and takes about 25 minutes to download and save over a generic cable internet connection.
     * To upload the data, open a terminal and navigate to the mysite directory of the project root.  Enter the command "python manage.py dbsetup" and allow it to run.
 * Graphical navigation via a web browser.
@@ -17,9 +18,9 @@
 
 ## Known Issues
 
-* No way to update existing data.
-    * Need to code a dbupdate command that can be invoked similarly to dbsetup.
-* Nonexistent sols should be identified as such rather than loaded with a generic "no data for this sol" page.
+* _DBsetup_ wipes out and replaces existing data.
+* No meaningful error handling in _dbsetup_ or _dbupdate_ - need to implement database error handling and research CommandError.
+* Nonexistent sols should be identified as such rather than loaded with the generic "no data for this sol" page used for sols that have no data.
 
 ## Future Development
 
