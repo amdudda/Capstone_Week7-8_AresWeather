@@ -14,7 +14,7 @@
                 <!-- if no data available, notify the user. -->
                 No data available for this sol.
             {% else %}
-                Low temp: {{ weather.min_temp }} ({{ weather.min_temp_fahrenheit }}F)<br/>
+                Low temp: {{ weather.min_temp }}C ({{ weather.min_temp_fahrenheit }}F)<br/>
                 High temp: {{ weather.max_temp }}C ({{ weather.max_temp_fahrenheit }}F)<br/>
                 Wind speed:
                     {% if weather.wind_speed %}
@@ -22,9 +22,19 @@
                     {% else %}
                         n/a<br/>
                     {% endif %}
+                {% if weather.pressure %}
+                    Pressure: {{ weather.pressure }}
+                    {% if weather.pressure_string %}
+                        (getting {{weather.pressure_string}})
+                    {% endif %}
+                    <br/>
+                {% endif %}
                 {% if weather.atmo_opacity %}
                     Skies are: {{ weather.atmo_opacity }}<br/>
                 {% endif %}
+                <!-- not using these, meaning of dates is not clear:
+                Sunrise/sunset: {{ weather.sunrise }} / {{ weather.sunset }}<br/>
+                -->
                 (date: {{ weather.terrestrial_date }})<br/>
             {% endif %}
 
